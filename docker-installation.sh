@@ -1,11 +1,15 @@
 #!/bin/sh
 
-# Install the yum-utils package (which provides the yum-config-manager utility) and set up the repository.
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# Docker CE Install
+sudo amazon-linux-extras install -y docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
 
-# Install the latest version of Docker Engine and Docker Compose:
-sudo yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+# Make docker auto-start
+sudo chkconfig docker on
 
-# Start Docker:
-sudo systemctl start docker
+# docker-compose install
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+# Fix permissions after download
+sudo chmod +x /usr/local/bin/docker-compose
