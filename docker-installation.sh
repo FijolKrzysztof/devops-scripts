@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Find docker-compose current release https://github.com/docker/compose/releases
+docker_compose_version="2.15.1"
+
 # Docker CE Install
 sudo amazon-linux-extras install -y docker
 sudo service docker start
@@ -8,8 +11,8 @@ sudo usermod -a -G docker ec2-user
 # Make docker auto-start
 sudo chkconfig docker on
 
-# docker-compose install
-sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+# Install docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 # Fix permissions after download
 sudo chmod +x /usr/local/bin/docker-compose
