@@ -1,0 +1,17 @@
+version: 1
+services:
+  lanstreamer-api:
+    image: lanstreamer-api
+    container_name: lanstreamer-api
+    ports:
+      - 5000:80
+  lanstreamer-web:
+    image: lanstreamer-web
+    container_name: lanstreamer-web
+    ports:
+      - 80:3000
+  lanstreamer-auth:
+    image: lanstreamer-auth
+    container_name: lanstreamer-auth
+    ports:
+      - 443:4200
