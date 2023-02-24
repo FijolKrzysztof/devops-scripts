@@ -1,20 +1,13 @@
 #!/bin/bash
 
-SCRIPTS_PATH=~/Apps/devops-scripts/
-POBRANE_PATH=~/Pobrane/
+container=$1
+path=$2
 
-API=lanstreamer-api
-WEB=lanstreamer-web
-AUTH=lanstreamer-auth
+pobrane_path="~/Pobrane/"
+devops_path="~/Apps/devops-scripts/"
 
-UPLOAD=upload-file.sh
-KEY_PAIR=key-pair.pem
-IP_ADDRESS=ip-address.txt
-
-docker save -o $POBRANE_PATH+$API $API
-docker save -o $POBRANE_PATH+$WEB $WEB
-docker save -o $POBRANE_PATH+$AUTH $AUTH
-
-$SCRIPTS_PATH+$UPLOAD $SCRIPTS_PATH+$KEY_PAIR $SCRIPTS_PATH+$IP_ADDRESS $POBRANE_PATH+$API
-$SCRIPTS_PATH+$UPLOAD $SCRIPTS_PATH+$KEY_PAIR $SCRIPTS_PATH+$IP_ADDRESS $POBRANE_PATH+$WEB
-$SCRIPTS_PATH+$UPLOAD $SCRIPTS_PATH+$KEY_PAIR $SCRIPTS_PATH+$IP_ADDRESS $POBRANE_PATH+$AUTH
+docker rm -f "$container"
+docker rmi -f "$container"
+docker build -t "$container $path$container"
+docker save -o "$pobrane_path $container"
+"${devops_path}upload-file.sh ${devops_path}key-pair.pem ${devops_path}ip-address.txt ${path}${container}"
