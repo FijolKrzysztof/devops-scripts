@@ -3,8 +3,9 @@
 import command
 
 for container in [
-    {'name': 'lanstreamer-api', 'path': '~Apps/lanstreamer-api/'},
-    {'name': 'lanstreamer-web', 'path': '~Apps/lanstreamer-code/lanstreamer/'},
-    {'name': 'lanstreamer-auth', 'path': '~Apps/lanstreamer-code/lanstreamer-web/'},
+    {'name': 'lanstreamer-api', 'path': '/home/krzysztof/Apps/lanstreamer-api/'},
+    {'name': 'lanstreamer-web', 'path': '/home/krzysztof/Apps/lanstreamer-code/lanstreamer/'},
+    {'name': 'lanstreamer-auth', 'path': '/home/krzysztof/Apps/lanstreamer-code/lanstreamer-web/'},
 ]:
-    command.run(f'~/Apps/devops-scripts/upload-containers {container["name"]} {container["path"]}')
+    response = command.run(['/home/krzysztof/Apps/devops-scripts/upload-containers.sh', container["name"], container["path"]], debug=True)
+    print(response.output)
