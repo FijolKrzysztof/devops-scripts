@@ -5,3 +5,5 @@ for name in ['lanstreamer-api' 'lanstreamer-web' 'lanstreamer-auth']; do
   docker rmi -f "$name"
   docker load -i "/tmp/$name"
 done
+
+docker-compose up -d
