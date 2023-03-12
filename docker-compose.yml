@@ -9,9 +9,4 @@ services:
     image: lanstreamer-web
     container_name: lanstreamer-web
     ports:
-      - 443:3000
-  lanstreamer-auth:
-    image: lanstreamer-auth
-    container_name: lanstreamer-auth
-    ports:
-      - 80:80
+      - 443:80
